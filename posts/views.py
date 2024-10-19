@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
+from .models import Post, Post_Attachments
 from .form import PostForm
 
 # Create your views here.
@@ -7,9 +7,9 @@ from .form import PostForm
 def index(request):
     # l = [i for i in range(1, 10)]
     miras = Post.objects.all() # SELECT * FROM Post 
-
-
-
+    for post in miras:
+        att = Post_Attachments.objects.filter(post_id = post.pk)
+        post.att = att
     return render(request, 'posts/index.html', {"x": miras})
 
 def add_post(request):
@@ -36,7 +36,10 @@ def edit_post(request, pid):
     
     return render(request, 'posts/editPost.html', {'form': form})
             
-            
+def delete_post(request, pid):
+    post = Post.objects.get(pk = pid)
+    post.delete()
+    return redirect('post_list')
 
     
     

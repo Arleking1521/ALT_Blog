@@ -11,3 +11,15 @@ class Post(models.Model):
     def __str__(self) -> str:
         return f'{self.author}: {self.title}'
     
+class Post_Attachments(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image = models.FileField(upload_to='post_atts/')
+    type = models.CharField(max_length=6, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        file_ex = self.image.name.split('.')[-1].lower()
+        if file_ex in ['jpeg', 'jpg', 'png', 'tfif', 'gif']:
+            self.type = 'img'
+        else:
+            self.type = 'doc'
+        super().save(*args, **kwargs)

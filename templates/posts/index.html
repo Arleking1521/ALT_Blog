@@ -1,6 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
 {% for i in x %}
-    <h1>{{ i }}</h1>
-    <a href="{% url 'edit_post' pid=i.pk %}">Edit</a>
+    <div style="border: 1px solid red; margin: 10px;">
+        <h1>{{ i.title }}</h1>
+        <p>post by {{i.author}} : {{i.date}}</p>
+        {% for att in i.att %}
+        {% if att.type == 'img' %}
+        <img src="/media/{{att.image}}">
+        {% endif %}
+        {% endfor %}
+        
+        <a href="{% url 'edit_post' pid=i.pk %}"><button>Edit</button></a>
+        
+        <a href="{% url 'delete_post' pid=i.pk %}"><button>Delete</button></a>
+    </div>
 {% endfor %}
 
-<a href="{% url 'add_post' %}">DOBAVIT POST</a>
+{% endblock %}
