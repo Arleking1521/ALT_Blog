@@ -1,0 +1,6 @@
+{% for i in x %}
+    <h1>{{ i }}</h1>
+    <a href="{% url 'edit_post' pid=i.pk %}">Edit</a>
+{% endfor %}
+
+<a href="{% url 'add_post' %}">DOBAVIT POST</a>
