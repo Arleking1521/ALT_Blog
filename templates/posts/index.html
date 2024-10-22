@@ -7,7 +7,7 @@
         <p>post by {{i.author}} : {{i.date}}</p>
         {% for att in i.att %}
         {% if att.type == 'img' %}
-        <img src="/media/{{att.image}}">
+        <img src="/media/{{att.image}}" width="100%">
         {% endif %}
         {% endfor %}
         
