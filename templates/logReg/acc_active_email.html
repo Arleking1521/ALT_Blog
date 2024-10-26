@@ -1,0 +1,6 @@
+{% autoescape off %}
+Здравствйте, {{ user.name }} {{user.surname}}
+Пожалуйста перейдите по ссылке для подтверждения регистрации: 
+<a href="http://{{ domain }} {% url 'activate' uidb64=uid token=token %}"></a>
+Если вы не проходили регистрацию на нашем сайта, можете проигнорировать данное сообщение.
+{% endautoescape %}

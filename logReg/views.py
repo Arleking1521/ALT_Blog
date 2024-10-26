@@ -60,7 +60,7 @@ def registration(request):
             return render(request,'registration/registr_email_messege.html', {'email' : to_email}) 
     else: 
         form = RegistrationForm() 
-    return render(request, 'registration/registration.html', {'form': form})
+    return render(request, 'logReg/registration.html', {'form': form})
 
 def user_login(request):
     if request.method == 'POST':
