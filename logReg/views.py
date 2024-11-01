@@ -59,6 +59,7 @@ def registration(request):
             email = EmailMessage( 
                         mail_subject, message, to=[to_email] 
             ) 
+            email.content_subtype = "html"
             email.send() 
             return render(request,'logReg/registr_email_messege.html', {'email' : to_email}) 
     else: 
