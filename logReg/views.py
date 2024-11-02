@@ -92,7 +92,7 @@ def user_login(request):
             user = authenticate(email=form.cleaned_data['email'], password=form.cleaned_data['password'])
             if user is not None:
                 auth_login(request, user)
-                return redirect('index')
+                return redirect('post_list')
     else:
         form = LoginForm()
     return render(request, 'logReg/login.html', {'form': form})
@@ -101,4 +101,4 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('index')
+    return redirect('post_list')

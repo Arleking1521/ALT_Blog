@@ -10,10 +10,12 @@
         <img src="/media/{{att.image}}" width="100%">
         {% endif %}
         {% endfor %}
-        
+        {% if user == i.author or user.is_staff %}
         <a href="{% url 'edit_post' pid=i.pk %}"><button>Edit</button></a>
-        
+        {% endif %}
+        {% if user == i.author or user.is_staff %}
         <a href="{% url 'delete_post' pid=i.pk %}"><button>Delete</button></a>
+        {% endif %}
     </div>
 {% endfor %}
 

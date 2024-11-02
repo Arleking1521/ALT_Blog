@@ -18,13 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from logReg.views import registration, activate
+from logReg.views import registration, activate, user_login, user_logout
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/', include('posts.urls')),
     path('registr/', registration, name='registr'),
+    path('login/', user_login, name='login'),
+    path('logout/', user_logout, name='logout'),
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', activate, name='activate'),
 ]
 
