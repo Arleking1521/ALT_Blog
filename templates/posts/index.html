@@ -1,22 +1,58 @@
 {% extends "base.html" %}
 
+{% block add %}
+    {% if user.is_authenticated %}
+        <a class="start-content__btn" href="{% url 'add_post' %}"><button class="start-content__btn">Add post</button></a>
+    {% endif %}
+{%endblock%}
+
 {% block content %}
-{% for i in x %}
-    <div style="border: 1px solid red; margin: 10px;">
-        <h1>{{ i.title }}</h1>
-        <p>post by {{i.author}} : {{i.date}}</p>
-        {% for att in i.att %}
-        {% if att.type == 'img' %}
-        <img src="/media/{{att.image}}" width="100%">
-        {% endif %}
-        {% endfor %}
-        {% if user == i.author or user.is_staff %}
-        <a href="{% url 'edit_post' pid=i.pk %}"><button>Edit</button></a>
-        {% endif %}
-        {% if user == i.author or user.is_staff %}
-        <a href="{% url 'delete_post' pid=i.pk %}"><button>Delete</button></a>
-        {% endif %}
+<section class="posts">
+    <div class="container">
+        <div class="posts-bottom">
+            <div class="posts-title">
+                <h1 class="posts-title_h1">
+                    Posts
+                </h1>
+                <hr class="posts-title_hr">
+            </div>
+            <div class="cards-bottom">
+                {% for i in x %}
+                    <div class="posts-bottom-card">
+                        <div class="card-picrute">
+                            {% for att in i.att %}
+                                {% if att.type == 'img' %}
+                                    <img src="/media/{{att.image}}" width="100%">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="posts-bottom-card-content-top">
+                            <h1 class="posts-bottom-card-title">{{ i.title }}</h1>
+                            <!-- <p class="posts-bottom-card-subtitle">Life begins at the end of your comfort zone.</p> -->
+                        </div>
+                        <hr>
+                        <div class="posts-bottom-card-content-bottom">
+                            <div class="card-content-bottom">
+                                <div class="card-content-bottom-author">
+                                    <!-- <img src="./assets/image/author-logo-2.svg" alt="" class="author-icon"> -->
+                                    <p class="bottom-author-name">
+                                        post by: {{i.author}} 
+                                    </p>
+                                </div>
+                                <p class="card-content-bottom-data">{{i.date}}</p>
+                            </div>
+                            {% if user == i.author or user.is_staff %}
+                                <a href="{% url 'edit_post' pid=i.pk %}"><button>Edit</button></a>
+                            {% endif %}
+                            {% if user == i.author or user.is_staff %}
+                                <a href="{% url 'delete_post' pid=i.pk %}"><button>Delete</button></a>
+                            {% endif %}
+                        </div>
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
     </div>
-{% endfor %}
+</section>
 
 {% endblock %}

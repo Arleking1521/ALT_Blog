@@ -23,7 +23,7 @@ from logReg.views import registration, activate, user_login, user_logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('posts/', include('posts.urls')),
+    path('', include('posts.urls')),
     path('registr/', registration, name='registr'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
